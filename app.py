@@ -29,13 +29,11 @@ pipe = pipeline(
 )
 
 def transcribe(task, file):
-        args = {'task': task}
-
         if file is not None:
             audio = file
         else:
             return "You must provide a mic recording or a file"
-        result = pipe(audio, **args)
+        result = pipe(audio, generate_kwargs={"task": task})
         return result["text"]
 
 
@@ -45,5 +43,7 @@ demo = gr.Interface(transcribe,
         gr.Radio(['transcribe', 'translate'], label= 'Task'),
         gr.Audio(sources=["upload"], type="filepath", label='Audio File')
         ], 
-    outputs="text")
+    outputs="text",
+    live=True
+    )
 demo.launch(share=True) 
