@@ -43,7 +43,7 @@ def transcribe(task, file):
 demo = gr.Interface(transcribe, 
     inputs=[
         gr.Radio(['transcribe', 'translate'], label= 'Task'),
-        gr.Audio(source='upload', type='filepath', optional=True, label='Audio File')
+        gr.Audio(sources=["upload"], type="filepath", optional=True, label='Audio File')
         ], 
     outputs="text")
 demo.launch(share=True) 
